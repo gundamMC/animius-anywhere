@@ -89,3 +89,6 @@ __generated__
 
 # Watchman
 .watchmanconfig
+
+# MacOS
+.DS_Store
