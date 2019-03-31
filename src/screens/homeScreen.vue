@@ -15,7 +15,7 @@
 
       <nb-text>Animius</nb-text>
 
-      <nb-button v-bind:on-press="handleBtnPress">
+      <nb-button :onPress="() => this.props.navigation.navigate('Login')">
         <nb-text>{{message}}</nb-text>
       </nb-button>
       
@@ -41,14 +41,14 @@
 
 <script>
 export default{
+  props: {
+    navigation: {
+      type: Object
+    }
+  },
   data(){
     return {
       message: 'Hello World!'
-    }
-  },
-  methods: {
-    handleBtnPress: function() {
-      alert('Btn Press');
     }
   }
 }

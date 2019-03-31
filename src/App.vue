@@ -10,11 +10,13 @@ import { StackNavigator, DrawerNavigator } from "vue-native-router";
 import { Root } from "native-base";
 
 import HomeScreen from "../src/screens/homeScreen.vue";
+import LoginScreen from "../src/screens/loginScreen.vue"
 import Sidebar from '../src/screens/sidebar.vue';
 
 const Drawer = DrawerNavigator(
   {
-    Home: HomeScreen
+    Home: HomeScreen,
+    Login: LoginScreen
   },
   {
     initialRouteName: "Home",

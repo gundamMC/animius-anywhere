@@ -60,8 +60,8 @@ export default {
       },
       datas: [
         {
-          name: "Anatomy",
-          route: "Anatomy",
+          name: "Home",
+          route: "Home",
           icon: "phone-portrait",
           bg: "#C5F442"
         },
