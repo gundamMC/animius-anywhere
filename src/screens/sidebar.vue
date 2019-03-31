@@ -3,7 +3,7 @@
     <nb-content class="sidebar-content-wrapper" :bounces="false">
       <!-- <image :source="drawerCover" class="drawer-cover" :style="stylesObj.drawerCoverObj"/>
       <image :source="drawerImage" class="drawer-image" :style="stylesObj.drawerImageObj"/> -->
-      <nb-list>
+      <nb-list v-if="logged_in">
         <nb-list-item v-for="data in datas" :key="data.route" button noBorder :onPress="() => handleListItemClick(data)">
           <nb-left>
             <nb-icon
@@ -24,6 +24,7 @@
           </nb-right>
         </nb-list-item>
       </nb-list>
+      <nb-text v-else>Please log in first.</nb-text>
     </nb-content>
   </nb-container>
 </template>
@@ -32,13 +33,21 @@
 import { Dimensions, Platform } from "react-native";
 const deviceHeight = Dimensions.get("window").height;
 const deviceWidth = Dimensions.get("window").width;
+
+import store from "../store";
+
 export default {
   props: {
     navigation: {
       type: Object
     }
   },
-  data: function() {
+  computed: {
+    logged_in(){
+      return store.state.logged_in;
+    } 
+  },
+  data() {
     return {
     //   drawerCover: drawerCover,
     //   drawerImage: drawerImage,

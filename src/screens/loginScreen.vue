@@ -25,7 +25,7 @@
       </nb-button>
 
       <nb-button v-bind:on-press="handleGuidePress" transparent light :style="{position: 'absolute', bottom: 0, alignSelf: 'center'}">
-        <nb-text>Get Animius</nb-text>
+        <nb-text>Get Animius {{logged_in}}</nb-text>
       </nb-button>
 
       </image-background>
@@ -38,11 +38,18 @@ import { Dimensions, Linking } from "react-native";
 import loginScreenBg from '../../assets/login-bg.png';
 import logo from "../../assets/logo.png";
 
+import store from "../store";
+
 export default{
   props: {
     navigation: {
       type: Object
     }
+  },
+  computed: {
+    logged_in(){
+      return store.state.logged_in;
+    } 
   },
   data() {
     return {
@@ -62,7 +69,12 @@ export default{
   methods: {
     handleBtnPress: function() {
       alert(`Logging in with ${this.$data.username} : ${this.$data.password}`);
-      this.navigation.navigate("Home");
+
+      store.commit('login');
+
+      console.log(store.state.logged_in);
+
+      // this.navigation.navigate("Home");
     },
     handleGuidePress: function() {
       Linking.openURL('https://animius.org/')
