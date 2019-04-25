@@ -11,6 +11,10 @@
 
       <nb-form class="vertical-margin">
         <nb-item floatingLabel class="form-item">
+          <nb-label :style="{color: 'white'}">IP</nb-label>
+          <nb-input v-model="ip"/>
+        </nb-item>
+        <nb-item floatingLabel class="form-item">
           <nb-label :style="{color: 'white'}">Username</nb-label>
           <nb-input v-model="username"/>
         </nb-item>
@@ -40,6 +44,8 @@ import logo from "../../assets/logo.png";
 
 import store from "../store";
 
+import socket from '../socket_controller.js'
+
 export default{
   props: {
     navigation: {
@@ -57,6 +63,7 @@ export default{
       logo: logo,
       username: "",
       password: "",
+      ip: "",
 
       stylesObj: {
         logoContainerStyle: {
@@ -69,6 +76,8 @@ export default{
   methods: {
     handleBtnPress: function() {
       alert(`Logging in with ${this.$data.username} : ${this.$data.password}`);
+
+      socket.connect(this.$data.ip, this.$data.username, this.$data.password);
 
       store.commit('login');
 
