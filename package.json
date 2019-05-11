@@ -1,14 +1,5 @@
 {
   "main": "node_modules/expo/AppEntry.js",
-  "browser": {
-    "net": "react-native-tcp",
-    "_stream_transform": "readable-stream/transform",
-    "_stream_readable": "readable-stream/readable",
-    "_stream_writable": "readable-stream/writable",
-    "_stream_duplex": "readable-stream/duplex",
-    "_stream_passthrough": "readable-stream/passthrough",
-    "stream": "stream-browserify"
-  },
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -18,12 +9,8 @@
   "dependencies": {
     "expo": "^32.0.0",
     "native-base": "^2.12.1",
-    "process": "^0.11.0",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
-    "react-native-tcp": "git+https://github.com/nkovacic/react-native-tcp.git",
-    "readable-stream": "^1.0.33",
-    "stream-browserify": "^1.0.0",
     "vue-native-core": "0.0.8",
     "vue-native-helper": "0.0.10",
     "vue-native-router": "0.0.1-alpha.3",
@@ -31,17 +18,7 @@
   },
   "devDependencies": {
     "babel-preset-expo": "^5.0.0",
-    "rn-nodeify": "^10.0.1",
     "vue-native-scripts": "0.0.14"
   },
-  "private": true,
-  "react-native": {
-    "net": "react-native-tcp",
-    "_stream_transform": "readable-stream/transform",
-    "_stream_readable": "readable-stream/readable",
-    "_stream_writable": "readable-stream/writable",
-    "_stream_duplex": "readable-stream/duplex",
-    "_stream_passthrough": "readable-stream/passthrough",
-    "stream": "stream-browserify"
-  }
+  "private": true
 }
