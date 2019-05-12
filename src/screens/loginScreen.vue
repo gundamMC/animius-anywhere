@@ -7,16 +7,20 @@
         <image-background :source="logo" class="logo">
       </view>
 
-      <nb-text :style="{fontSize: 32, marginTop: 10, alignSelf: 'center', color: 'white'}">Animius</nb-text>
+      <nb-text :style="{fontSize: 32, marginTop: 5, alignSelf: 'center', color: 'white'}">Animius</nb-text>
 
       <nb-form class="vertical-margin">
         <nb-item floatingLabel class="form-item">
+          <nb-label :style="{color: 'white'}">IP</nb-label>
+          <nb-input :style="{color: 'white'}" v-model="ip"/>
+        </nb-item>
+        <nb-item floatingLabel class="form-item">
           <nb-label :style="{color: 'white'}">Username</nb-label>
-          <nb-input v-model="username"/>
+          <nb-input :style="{color: 'white'}" v-model="username"/>
         </nb-item>
         <nb-item floatingLabel class="form-item">
           <nb-label :style="{color: 'white'}">Password</nb-label>
-          <nb-input v-model="password"/>
+          <nb-input :style="{color: 'white'}" v-model="password"/>
         </nb-item>
       </nb-form>
 
@@ -25,10 +29,10 @@
       </nb-button>
 
       <nb-button v-bind:on-press="handleGuidePress" transparent light :style="{position: 'absolute', bottom: 0, alignSelf: 'center'}">
-        <nb-text>Get Animius {{logged_in}}</nb-text>
+        <nb-text>Get Animius</nb-text>
       </nb-button>
 
-      </image-background>
+    </image-background>
 
   </nb-container>
 </template>
@@ -37,8 +41,9 @@
 import { Dimensions, Linking } from "react-native";
 import loginScreenBg from '../../assets/login-bg.png';
 import logo from "../../assets/logo.png";
+import { Toast } from "native-base";
 
-import store from "../store";
+import client from '../socketClient.js';
 
 export default{
   props: {
@@ -46,21 +51,17 @@ export default{
       type: Object
     }
   },
-  computed: {
-    logged_in(){
-      return store.state.logged_in;
-    } 
-  },
   data() {
     return {
       loginScreenBg: loginScreenBg,
       logo: logo,
+      ip: "",
       username: "",
       password: "",
 
       stylesObj: {
         logoContainerStyle: {
-          marginTop: Dimensions.get("window").height / 8,
+          marginTop: Dimensions.get("window").height / 10,
           alignSelf: 'center'
         }
       }
@@ -68,13 +69,20 @@ export default{
   },
   methods: {
     handleBtnPress: function() {
-      alert(`Logging in with ${this.$data.username} : ${this.$data.password}`);
 
-      store.commit('login');
-
-      console.log(store.state.logged_in);
-
-      // this.navigation.navigate("Home");
+      client.connect(this.$data.ip, this.$data.username, this.$data.password, (success, message) =>
+      { 
+        if (success){
+          this.navigation.navigate("Home");
+        } else {
+          Toast.show({
+            text: message,
+            buttonText: "Okay",
+            duration: 3000
+          });
+          };
+        } 
+      );
     },
     handleGuidePress: function() {
       Linking.openURL('https://animius.org/')
@@ -89,7 +97,7 @@ export default{
 }
 
 .vertical-margin {
-  margin-top: 10%;
+  margin-top: 0;
   margin-bottom: 10%;
 }
 

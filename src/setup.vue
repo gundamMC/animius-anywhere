@@ -15,6 +15,13 @@ import App from "./App.vue";
 // registering all native-base components to the global scope of the Vue
 Vue.use(VueNativeBase);
 
+// remove socket.io warning
+// console.ignoredYellowBox = ['Remote debugger'];
+// import { YellowBox } from 'react-native';
+// YellowBox.ignoreWarnings([
+//     'Unrecognized WebSocket connection option(s) `agent`, `perMessageDeflate`, `pfx`, `key`, `passphrase`, `cert`, `ca`, `ciphers`, `rejectUnauthorized`. Did you mean to put these under `headers`?'
+// ]);
+
 export default {
   components: { App, AppLoading },
   data: function() {
