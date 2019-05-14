@@ -7,13 +7,13 @@
         </nb-button>
       </nb-left>
       <nb-body>
-        <nb-title>Header</nb-title>
+        <nb-title>Animius</nb-title>
       </nb-body>
       <nb-right />
     </nb-header>
     <nb-content padder>
 
-      <nb-text>Animius</nb-text>
+      <!-- <nb-text>Animius</nb-text>
 
       <nb-button :onPress="() => this.props.navigation.navigate('Login')">
         <nb-text>{{message}}</nb-text>
@@ -23,7 +23,30 @@
         <nb-item>
           <nb-input placeholder="Username" v-model="message" />
         </nb-item>
-      </nb-form>
+      </nb-form> -->
+
+      <nb-card v-for="waifu in waifus" :key="waifu.name">
+        <nb-card-item>
+          <nb-left>
+            <nb-h2>{{ waifu.name }}</nb-h2>
+            <nb-text note>{{ waifu.description }}</nb-text>
+          </nb-left>
+          <nb-right>
+              <nb-icon name="edit" type="MaterialIcons" :style="{ fontSize: 20 }" />
+            </nb-right>
+        </nb-card-item>
+
+        <nb-card-item cardBody button :onPress="() => cardPressed(waifu)">
+            <image :source="{url: waifu.image}" class="card-item-image" :style="{resizeMode: 'cover'}"/>
+        </nb-card-item>
+
+        <nb-card-item button :onPress="() => cardPressed(waifu)">
+            <nb-text note>Today's weather in Chicago is...</nb-text>
+            <nb-right>
+              <nb-text note>11h ago</nb-text>
+            </nb-right>
+        </nb-card-item>
+      </nb-card>
 
     </nb-content>
 
@@ -51,18 +74,30 @@ export default{
     }
   },
   created: function(){
-    if (!store.state.logged_in){
-      this.navigation.navigate("Login");
+    // if (!store.state.logged_in){
+    //   this.navigation.navigate("Login");
+    // }
+  },
+  methods: {
+    cardPressed: function(waifu){
+      alert(`Test name: ${waifu.name}, descp: ${waifu.description}`);
     }
   },
   data(){
     return {
-      message: 'Hello World!'
+      message: 'Hello World!',
+      waifus: [
+        {name: 'Emilia', description: "E.M.T.!!!!!", image: 'https://vignette.wikia.nocookie.net/rezero/images/3/3e/Episode_8.png/revision/latest?cb=20160520212139'},
+        {name: 'Chitanda', description: "吃蛋挞", image: 'https://www.wallpaperup.com/uploads/wallpapers/2013/04/14/75491/cb20c3465bafcab6556c923aa63deb45-700.jpg'}
+      ] 
     }
   }
 }
 </script>
  
 <style>
-
+.card-item-image {
+  flex: 1;
+  height: 200;
+}
 </style>
