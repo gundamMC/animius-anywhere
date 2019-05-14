@@ -4,7 +4,7 @@
     <image-background :source="loginScreenBg" class="image-container">
         
       <view class="logoContainer" :style="stylesObj.logoContainerStyle">
-        <image-background :source="logo" class="logo">
+        <image-background :source="logo" class="logo"/>
       </view>
 
       <nb-text :style="{fontSize: 32, marginTop: 5, alignSelf: 'center', color: 'white'}">Animius</nb-text>

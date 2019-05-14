@@ -80,7 +80,8 @@ export default{
   },
   methods: {
     cardPressed: function(waifu){
-      alert(`Test name: ${waifu.name}, descp: ${waifu.description}`);
+      // alert(`Test name: ${waifu.name}, descp: ${waifu.description}`);
+      this.navigation.navigate('WaifuText', {waifu: waifu});
     }
   },
   data(){
