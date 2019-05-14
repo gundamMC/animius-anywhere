@@ -40,10 +40,19 @@
 </template>
 
 <script>
+
+import store from '../store';
+
+
 export default{
   props: {
     navigation: {
       type: Object
+    }
+  },
+  created: function(){
+    if (!store.state.logged_in){
+      this.navigation.navigate("Login");
     }
   },
   data(){
