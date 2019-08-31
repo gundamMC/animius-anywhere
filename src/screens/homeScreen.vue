@@ -3,7 +3,7 @@
     <nb-header>
       <nb-left>
         <nb-button transparent>
-          <nb-icon name="menu" />
+          <nb-icon name="menu" :onPress="() => navigation.navigate('DrawerOpen')"/>
         </nb-button>
       </nb-left>
       <nb-body>
@@ -82,7 +82,7 @@ export default{
     cardPressed: function(waifu){
       // alert(`Test name: ${waifu.name}, descp: ${waifu.description}`);
       this.navigation.navigate('WaifuText', {waifu: waifu});
-    }
+    },
   },
   data(){
     return {

@@ -3,7 +3,7 @@
     <nb-header>
       <nb-left>
         <nb-button transparent>
-          <nb-icon name="arrow-back" />
+          <nb-icon name="arrow-back" :onPress="() => navigation.goBack()"/>
         </nb-button>
       </nb-left>
       <nb-body>
