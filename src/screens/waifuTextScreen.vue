@@ -12,18 +12,39 @@
       <nb-right />
     </nb-header>
     <nb-content padder>
+
+        <ScrollView :style="{height: test}">
+          <chatBubble is_user message="Hello"/>   
+          
+          <chatBubble message="Hello this is a really fucking long message hahahahaha hahah "/>
+          <chatBubble is_user message="Hello this is a really fucking long message hahahahaha hahah "/>
+          <chatBubble message="Hello this is a really fucking long message hahahahaha hahah "/>
+          <chatBubble is_user message="Hello this is a really fucking long message hahahahaha hahah "/>
+
+          <chatBubble message="Hello this is a really fucking long message hahahahaha hahah "/>
+          <chatBubble is_user message="Hello this is a really fucking long message hahahahaha hahah "/>
+          <chatBubble message="Hello this is a really fucking long message hahahahaha hahah "/>
+          <chatBubble is_user message="Hello this is a really fucking long message hahahahaha hahah "/>
+
+        </ScrollView>
+
+        <view class="footer-view">
+          <text-input class="text-input"/>
+        </view>
     </nb-content>
 
   </nb-container>
 </template>
 
 <script>
-import { Dimensions, Linking } from "react-native";
+import { Dimensions } from "react-native";
 import loginScreenBg from '../../assets/login-bg.png';
 import logo from "../../assets/logo.png";
 import { Toast } from "native-base";
 
 import client from '../socketClient.js';
+
+import chatBubble from '../components/chatBubble';
 
 export default{
   props: {
@@ -40,18 +61,39 @@ export default{
   data() {
     return {
       loginScreenBg: loginScreenBg,
-      waifu: this.navigation.state.params['waifu']
+      waifu: this.navigation.state.params['waifu'],
+    }
+  },
+  computed: {
+    test() {
+      return Dimensions.get('window').height * 0.8
     }
   },
   methods: {
+  },
+  components: {
+    chatBubble
   }
 }
 </script>
  
-<style>
-.speech-bubble {
-  background-color: #00aabb;
-  border-radius: 4;
+<style scoped>
+
+.scroll-view {
+  height: 400px;
+}
+
+
+.footer-view {
+  position: relative;
+  width: 100%;
+  bottom: 0;
+  background-color: #EFEFEF;
+  padding: 5px;
+}
+
+.text-input {
+  height: 40px;
 }
 
 </style>
