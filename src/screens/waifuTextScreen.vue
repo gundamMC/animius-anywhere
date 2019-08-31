@@ -1,99 +1,100 @@
 <template>
-  <nb-container>
-    <nb-header>
-      <nb-left>
-        <nb-button transparent>
-          <nb-icon name="arrow-back" :onPress="() => navigation.goBack()"/>
-        </nb-button>
-      </nb-left>
-      <nb-body>
-        <nb-title>{{waifu.name}}</nb-title>
-      </nb-body>
-      <nb-right />
-    </nb-header>
-    <nb-content padder>
+    <nb-container>
+        <nb-header>
+            <nb-left>
+                <nb-button transparent>
+                    <nb-icon name="arrow-back" :onPress="() => navigation.goBack()"/>
+                </nb-button>
+            </nb-left>
+            <nb-body>
+                <nb-title>{{waifu.name}}</nb-title>
+            </nb-body>
+            <nb-right/>
+        </nb-header>
+        <nb-content padder :scrollEnabled="false">
 
-        <ScrollView :style="{height: test}">
-          <chatBubble is_user message="Hello"/>   
-          
-          <chatBubble message="Hello this is a really fucking long message hahahahaha hahah "/>
-          <chatBubble is_user message="Hello this is a really fucking long message hahahahaha hahah "/>
-          <chatBubble message="Hello this is a really fucking long message hahahahaha hahah "/>
-          <chatBubble is_user message="Hello this is a really fucking long message hahahahaha hahah "/>
+            <ScrollView :style="{height: test}" ref="chatScroll" :onContentSizeChange="testChange">
 
-          <chatBubble message="Hello this is a really fucking long message hahahahaha hahah "/>
-          <chatBubble is_user message="Hello this is a really fucking long message hahahahaha hahah "/>
-          <chatBubble message="Hello this is a really fucking long message hahahahaha hahah "/>
-          <chatBubble is_user message="Hello this is a really fucking long message hahahahaha hahah "/>
+                <chat-bubble v-for="message in chat" :is_user="message.is_user" :message="message.text" />
 
-        </ScrollView>
+            </ScrollView>
 
-        <view class="footer-view">
-          <text-input class="text-input"/>
-        </view>
-    </nb-content>
+            <view class="footer-view">
+                <nb-item rounded>
+                  <nb-input returnKeyType="send" :onSubmitEditing="sendText" ref="testsss"/>
+                </nb-item>
+            </view>
+        </nb-content>
 
-  </nb-container>
+    </nb-container>
 </template>
 
 <script>
-import { Dimensions } from "react-native";
-import loginScreenBg from '../../assets/login-bg.png';
-import logo from "../../assets/logo.png";
-import { Toast } from "native-base";
+    import {Dimensions} from "react-native";
 
-import client from '../socketClient.js';
+    import chatBubble from '../components/chatBubble';
 
-import chatBubble from '../components/chatBubble';
+    export default {
+        props: {
+            navigation: {
+                type: Object
+            }
+        },
+        created: function () {
+            // if (!store.state.logged_in){
+            //   this.navigation.navigate("Login");
+            // }
+            console.log(this.$props);
+        },
+        data() {
+            return {
+                waifu: this.navigation.state.params['waifu'],
+                chat: [
+                    {is_user: true, text: 'hello'},
+                    {is_user: false, text: 'Hi! How are you! This is a really long message'}
+                ]
+            }
+        },
+        computed: {
+            test() {
+                return Dimensions.get('window').height * 0.79
+            }
+        },
+        methods: {
+            sendText(text) {
+                this.chat.push({is_user: true, text: text.nativeEvent.text});
 
-export default{
-  props: {
-    navigation: {
-      type: Object
+                this.$refs.testsss.wrappedInstance.clear();
+                //
+                // Vue.nextTick(function () {
+                //   // DOM updated
+                //     this.$refs.chatScroll.scrollToEnd({animated: true});
+                // });
+
+            },
+            testChange() {
+                this.$refs.chatScroll.scrollToEnd({animated: true});
+            }
+        },
+        components: {
+            chatBubble
+        }
     }
-  },
-  created: function(){
-    // if (!store.state.logged_in){
-    //   this.navigation.navigate("Login");
-    // }
-    console.log(this.$props);
-  },
-  data() {
-    return {
-      loginScreenBg: loginScreenBg,
-      waifu: this.navigation.state.params['waifu'],
-    }
-  },
-  computed: {
-    test() {
-      return Dimensions.get('window').height * 0.8
-    }
-  },
-  methods: {
-  },
-  components: {
-    chatBubble
-  }
-}
 </script>
- 
+
 <style scoped>
 
-.scroll-view {
-  height: 400px;
-}
+    .scroll-view {
+        height: 400px;
+    }
 
 
-.footer-view {
-  position: relative;
-  width: 100%;
-  bottom: 0;
-  background-color: #EFEFEF;
-  padding: 5px;
-}
-
-.text-input {
-  height: 40px;
-}
+    .footer-view {
+        position: relative;
+        width: 100%;
+        bottom: 0;
+        background-color: #ffffff;
+        padding: 5px;
+    }
 
 </style>
