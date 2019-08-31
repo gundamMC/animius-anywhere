@@ -8,7 +8,6 @@
 
 <script>
 import Vue from "vue-native-core";
-import { StackNavigator } from "vue-native-router";
 import { VueNativeBase } from "native-base";
 import { AppLoading } from "expo";
 import App from "./App.vue";

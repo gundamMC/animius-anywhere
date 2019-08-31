@@ -48,7 +48,6 @@
         },
         data() {
             return {
-                waifu: this.navigation.state.params['waifu'],
                 chat: [
                     {is_user: true, text: 'hello'},
                     {is_user: false, text: 'Hi! How are you! This is a really long message'}
@@ -58,6 +57,9 @@
         computed: {
             test() {
                 return Dimensions.get('window').height * 0.79
+            },
+            waifu(){
+                return this.navigation.state.params['waifu']
             }
         },
         methods: {
@@ -70,6 +72,8 @@
                 //   // DOM updated
                 //     this.$refs.chatScroll.scrollToEnd({animated: true});
                 // });
+
+                console.log(this.navigation.state);
 
             },
             testChange() {

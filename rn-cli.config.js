@@ -1,4 +1,5 @@
 const { getDefaultConfig } = require("metro-config");
+const blacklist = require('metro-config/src/defaults/blacklist');
 
 module.exports = (async () => {
   const {
@@ -9,7 +10,10 @@ module.exports = (async () => {
       babelTransformerPath: require.resolve("./vueTransformerPlugin.js")
     },
     resolver: {
-      sourceExts: [...sourceExts, "vue"]
+      sourceExts: [...sourceExts, "vue"],
+      blacklistRE: blacklist([
+            /node_modules\/.*\/node_modules\/react-native\/.*/,
+        ])
     }
   };
 })();

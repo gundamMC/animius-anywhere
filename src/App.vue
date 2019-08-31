@@ -1,12 +1,12 @@
 <template>
     <root>
-      <app-navigation></app-navigation>
+      <app></app>
     </root>
 </template>
 
 <script>
 import React, { Component } from 'react';
-import { StackNavigator, DrawerNavigator } from "vue-native-router";
+import { createStackNavigator, createDrawerNavigator, createAppContainer } from "vue-native-router";
 import { Root } from "native-base";
 
 import HomeScreen from "../src/screens/homeScreen.vue";
@@ -14,7 +14,7 @@ import LoginScreen from "../src/screens/loginScreen.vue"
 import WaifuTextScreen from "../src/screens/waifuTextScreen.vue"
 import Sidebar from '../src/screens/sidebar.vue';
 
-const Drawer = DrawerNavigator(
+const Drawer = createDrawerNavigator(
   {
     Home: HomeScreen,
     Login: LoginScreen,
@@ -26,12 +26,11 @@ const Drawer = DrawerNavigator(
       activeTintColor: "#e91e63"
     },
     contentComponent: props => {
-      console.log("props inside contentComponent", props);
       return <Sidebar {...props} />;
     }
   }
 );
-const AppNavigation = StackNavigator(
+const AppNavigation = createStackNavigator(
   {
     Drawer: Drawer
   },
@@ -41,8 +40,10 @@ const AppNavigation = StackNavigator(
   }
 );
 
+const App = createAppContainer(AppNavigation);
+
 export default {
-    components: { Root, AppNavigation }
+    components: { Root, App }
 }
 
 </script>

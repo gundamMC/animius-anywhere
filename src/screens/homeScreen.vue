@@ -3,7 +3,7 @@
     <nb-header>
       <nb-left>
         <nb-button transparent>
-          <nb-icon name="menu" :onPress="() => navigation.navigate('DrawerOpen')"/>
+          <nb-icon name="menu" :onPress="() => navigation.openDrawer()"/>
         </nb-button>
       </nb-left>
       <nb-body>
@@ -81,7 +81,10 @@ export default{
   methods: {
     cardPressed: function(waifu){
       // alert(`Test name: ${waifu.name}, descp: ${waifu.description}`);
-      this.navigation.navigate('WaifuText', {waifu: waifu});
+      console.log(`Navigating to id ${waifu.name}`);
+      this.navigation.navigate({routeName: 'WaifuText', key: waifu.name, params: {waifu: waifu}});
+
+      // this.navigation.push('WaifuText', {waifu: waifu})
     },
   },
   data(){
