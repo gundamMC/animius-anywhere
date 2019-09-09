@@ -1,5 +1,4 @@
 import io from 'socket.io-client';
-import store from "./store";
 
 var socket = null;
 
@@ -20,13 +19,14 @@ function connect(ip, username, password, callback){
             if (data == true){
                 // log in success
                 console.log('logged in');
-                store.commit('login');
-                callback(true, null);
+                if (callback)
+                    callback(true, null);
             }
             else{
                 // failure, data should be the error message
                 console.log(data);
-                callback(false, data);
+                if (callback)
+                    callback(false, data);
             }
         });
     });

@@ -65,6 +65,8 @@
 <script>
 
 import store from '../store';
+import client from '../socketClient.js';
+import { Toast } from "native-base";
 
 
 export default{
@@ -74,17 +76,15 @@ export default{
     }
   },
   created: function(){
-    // if (!store.state.logged_in){
-    //   this.navigation.navigate("Login");
-    // }
+    if (!store.state.logged_in){
+      this.navigation.navigate("Login");
+    }
   },
   methods: {
     cardPressed: function(waifu){
-      // alert(`Test name: ${waifu.name}, descp: ${waifu.description}`);
+      // navigate to waifu
       console.log(`Navigating to id ${waifu.name}`);
       this.navigation.navigate({routeName: 'WaifuText', key: waifu.name, params: {waifu: waifu}});
-
-      // this.navigation.push('WaifuText', {waifu: waifu})
     },
   },
   data(){
