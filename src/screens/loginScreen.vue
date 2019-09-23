@@ -56,6 +56,7 @@ import store from '../store';
 auth_callback = (success, message) => {
         if (success) {
           this.navigation.navigate("Home");
+          store.dispatch('getWaifuList');
         } else {
           Toast.show({
             text: message,

@@ -78,6 +78,8 @@ export default{
   created: function(){
     if (!store.state.logged_in){
       this.navigation.navigate("Login");
+    } else {
+      store.dispatch('getWaifuList');
     }
   },
   methods: {
@@ -89,11 +91,11 @@ export default{
   },
   data(){
     return {
-      message: 'Hello World!',
-      waifus: [
-        {name: 'Emilia', description: "E.M.T.!!!!!", image: 'https://vignette.wikia.nocookie.net/rezero/images/3/3e/Episode_8.png/revision/latest?cb=20160520212139'},
-        {name: 'Chitanda', description: "吃蛋挞", image: 'https://www.wallpaperup.com/uploads/wallpapers/2013/04/14/75491/cb20c3465bafcab6556c923aa63deb45-700.jpg'}
-      ] 
+    }
+  },
+  computed: {
+    waifus() {
+      return store.getters.waifuList;
     }
   }
 }
