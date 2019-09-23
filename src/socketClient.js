@@ -48,4 +48,13 @@ function register(username, password){
     })
 }
 
-export default {connect: connect, register: register}
+function getWaifus(callback){
+    // callback to update the ui based on waifu data
+    socket.emit('getWaifu', callback);
+}
+
+function sendMessage(waifu_id, message, callback){
+    socket.emit('message', {name: waifu_id, message: message}, callback);
+}
+
+export default {connect: connect, register: register, getWaifus: getWaifus, sendMessage: sendMessage}
