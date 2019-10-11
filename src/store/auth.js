@@ -21,8 +21,11 @@ const actions = {
             ip = 'http://' + ip;
 
         client.connect(ip, username, password, (success, message) => {
-            if (success)
-                context.commit('login');
+            if (success){
+                context.commit('login', {ip, username});
+                context.dispatch('getWaifuList');
+            }
+                
             
             if (callback)
                 callback(success, message);

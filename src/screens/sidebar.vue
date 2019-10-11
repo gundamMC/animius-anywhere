@@ -3,7 +3,7 @@
     <nb-content class="sidebar-content-wrapper" :bounces="false">
       <!-- <image :source="drawerCover" class="drawer-cover" :style="stylesObj.drawerCoverObj"/>
       <image :source="drawerImage" class="drawer-image" :style="stylesObj.drawerImageObj"/> -->
-      <nb-list v-if="logged_in">
+      <nb-list v-if="loggedIn">
         <nb-list-item v-for="data in datas" :key="data.route" button noBorder :onPress="() => handleListItemClick(data)">
           <nb-left>
             <nb-icon
@@ -43,8 +43,8 @@ export default {
     }
   },
   computed: {
-    logged_in(){
-      return store.state.logged_in;
+    loggedIn(){
+      return store.getters.loggedIn;
     } 
   },
   data() {

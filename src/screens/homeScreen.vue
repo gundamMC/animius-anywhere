@@ -76,7 +76,7 @@ export default{
     }
   },
   created: function(){
-    if (!store.state.logged_in){
+    if (!store.getters.logged_in){
       this.navigation.navigate("Login");
     } else {
       store.dispatch('getWaifuList');

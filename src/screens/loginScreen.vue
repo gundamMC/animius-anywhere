@@ -11,7 +11,7 @@
       <nb-form class="vertical-margin">
         <nb-item floatingLabel class="form-item">
           <nb-label :style="{color: 'white'}">IP</nb-label>
-          <nb-input :style="{color: 'white'}" v-model="ip" />
+          <nb-input :style="{color: 'white'}" v-model="ip"/>
         </nb-item>
         <nb-item floatingLabel class="form-item">
           <nb-label :style="{color: 'white'}">Username</nb-label>
@@ -27,9 +27,9 @@
         <nb-text>Login</nb-text>
       </nb-button>
 
-      <nb-button class="button-container" v-bind:on-press="register">
+      <!-- <nb-button class="button-container" v-bind:on-press="register">
         <nb-text>Register</nb-text>
-      </nb-button>
+      </nb-button> -->
 
       <nb-button
         v-bind:on-press="handleGuidePress"
@@ -51,21 +51,6 @@ import { Toast } from "native-base";
 
 import store from '../store';
 
-
-// callback for login / register
-auth_callback = (success, message) => {
-        if (success) {
-          this.navigation.navigate("Home");
-          store.dispatch('getWaifuList');
-        } else {
-          Toast.show({
-            text: message,
-            buttonText: "Okay",
-            duration: 3000
-          });
-        }
-      };
-
 export default {
   props: {
     navigation: {
@@ -76,9 +61,9 @@ export default {
     return {
       loginScreenBg: loginScreenBg,
       logo: logo,
-      ip: "",
-      username: "",
-      password: "",
+      ip: "192.168.0.50:2334",
+      username: "gundamMC",
+      password: "gundamMC",
 
       stylesObj: {
         logoContainerStyle: {
@@ -90,20 +75,30 @@ export default {
   },
   methods: {
     login: function() {
-
-      console.log(this.ip);
+      // callback for login / register
+      auth_callback = (success, message) => {
+        if (success) {
+          this.navigation.navigate("Home");
+        } else {
+          Toast.show({
+            text: message,
+            buttonText: "Okay",
+            duration: 3000
+          });
+        }
+      };
 
       store.dispatch('login', { ip: this.ip, username: this.username, password: this.password, callback: auth_callback });
 
     },
 
-    register: function() {
+    // register: function() {
       
-      console.log(this.ip);
+    //   console.log(this.ip);
       
-      store.dispatch('register', { ip: this.ip, username: this.username, password: this.password, callback: auth_callback });
+    //   store.dispatch('register', { ip: this.ip, username: this.username, password: this.password, callback: auth_callback });
 
-    },
+    // },
 
     handleGuidePress: function() {
       Linking.openURL("https://animius.org/");
