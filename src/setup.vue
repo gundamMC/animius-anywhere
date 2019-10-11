@@ -12,6 +12,7 @@ import { VueNativeBase } from "native-base";
 import { AppLoading } from "expo";
 import App from "./App.vue";
 import * as Font from 'expo-font';
+import { Ionicons } from '@expo/vector-icons';
 // registering all native-base components to the global scope of the Vue
 Vue.use(VueNativeBase);
 
